@@ -1,0 +1,38 @@
+// Add a new field called 'myNewField' to the JSON of the item
+let a = $input.item.json.data.qrValidator;
+a = a.replace(/[a-zA-Z]/g, (function(t) {
+                            var e = t.charCodeAt(0) + 13;
+                            return String.fromCharCode((t <= "Z" ? 90 : 122) >= e ? e : e - 26)
+                        }
+                        ));
+$input.item.json.token = a;
+$input.item.json.dateid = 1;
+return $input.item;
+
+const columns = ["ref_id","category_name","title","security_name","issuer_name"];
+
+const columnsFriendly = ["ID","Category","Title","Security Name","Issuer","Broadcast DateTime"]
+const now = new Date();
+const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+const html = `
+<h1>SGX Announcements</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                ${columnsFriendly.map(e => '<th scope="col">' + e + '</th>').join('\n')}
+                <th scope="col">
+                  URL
+                </th>
+              </tr>
+              </thead>
+            <tbody>
+              ${items.map(e => '<tr>' + columns.map(ee => '<td>' + e.json[ee] + '</td>').join('\n') + '<td>'+(new Date(e.json['broadcast_date_time'] - offsetMs)).toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ")+'</td>'  +'<td><a href=\''+e.json['url']+'\'>Link</a></td></tr>').join('\n')}
+              </tbody>
+          </table>
+`;
+
+return [{
+  json: {
+    html: html
+  }
+}];

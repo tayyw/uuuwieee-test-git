@@ -1,7 +1,5 @@
 {
-  "_id": {
-    "$oid": "64c34878e822ab001c1148fd"
-  },
-  "SessionId": "123",
-  "History": "{\"type\": \"ai\", \"data\": {\"content\": \"Hello! How can I help you today?\", \"additional_kwargs\": {}, \"example\": false}}"
+  
+  "SessionId": "abcd",
+  "History": "{\"type\": \"ai\", \"data\": {\"content\": \"A typical German Shepherd is usually black and tan.\", \"additional_kwargs\": {}, \"example\": false}}"
 }
